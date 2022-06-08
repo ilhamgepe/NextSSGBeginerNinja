@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import NinjaList from ".";
 import Layouts from "../../components/layouts/Layouts";
 
 //ninjas/[id]
@@ -31,10 +33,30 @@ export const getStaticProps = async (memek) => {
 };
 
 const Ninja = ({ ninja }) => {
+  const [ninjas, setNinjas] = useState(null);
+  useEffect(() => {
+    const getNinjas = async () => {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      const data = await res.json();
+      setNinjas(data);
+    };
+    getNinjas();
+  }, []);
   return (
     <Layouts>
       <div>
         <p className="text-3xl font-semibold">Ninja {ninja.name} </p>
+        <ul>
+          <li>{ninja.username}</li>
+          <li>{ninja.website}</li>
+          <li>{ninja.phone}</li>
+          <li>{ninja.company.name}</li>
+        </ul>
+
+        <p>This another Ninjas</p>
+        <div>
+          <NinjaList ninjas={ninjas} />
+        </div>
       </div>
     </Layouts>
   );

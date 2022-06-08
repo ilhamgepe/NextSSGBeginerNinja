@@ -10,7 +10,8 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function index({ ninjas }) {
+export default function NinjaList({ ninjas }) {
+  console.log(ninjas);
   return (
     <Layouts>
       <div>
