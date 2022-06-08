@@ -2,6 +2,7 @@ import React from "react";
 import Layouts from "../../components/layouts/Layouts";
 
 //ninjas/[id]
+//kita harus menggunakan getstaticpaths untuk men-generate
 export const getStaticPaths = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const ninjas = await res.json();
@@ -10,6 +11,7 @@ export const getStaticPaths = async () => {
       params: { id: ninja.id.toString() },
     };
   });
+  // console.log(paths);
   return {
     paths,
     fallback: false,
